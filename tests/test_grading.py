@@ -1,5 +1,5 @@
 from models.matkul import MataKuliah, Komponen
-from services.grading import hitung_nilai_akhir, nilai_minimal
+from services.grading import hitung_nilai_akhir, nilai_minimal, hitung_ipk
 import pytest
 
 def test_nilai_akhir_lengkap():
@@ -67,3 +67,16 @@ def test_nilai_minimal_tanpa_sisa():
             Komponen("UAS", 40, 60), 
     ])
     assert nilai_minimal(m, 'A') is None
+    
+def test_hitung_ipk_dua_matkul():
+    assert hitung_ipk([(4, "A"), (3, "B")]) == pytest.approx(3.571, abs=0.001)
+    
+def test_hitung_ipk_satu_matkul():
+    assert hitung_ipk([(3, "B+")]) == pytest.approx(3.3)
+    
+def test_hitung_ipk_kosong():
+    assert hitung_ipk([]) == 0.0
+    
+def test_hitung_ipk_huruf_salah():
+    with pytest.raises(ValueError):
+        hitung_ipk([(3, "Z")])

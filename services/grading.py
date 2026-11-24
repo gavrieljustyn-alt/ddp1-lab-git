@@ -1,5 +1,5 @@
 from models.matkul import MataKuliah, Komponen
-from services.skala import batas_bawah
+from services.skala import batas_bawah, huruf_ke_bobot
 
 def total_bobot(matkul):
     total = 0
@@ -41,3 +41,14 @@ def nilai_minimal(matkul, target_huruf):
     if dibutuhkan > 100:
         return None
     return dibutuhkan
+
+def hitung_ipk(riwayat):
+    if not riwayat:
+        return 0.0
+
+    total_poin = 0
+    total_sks = 0
+    for sks, huruf in riwayat:
+        total_poin += sks * huruf_ke_bobot(huruf)
+        total_sks += sks
+    return total_poin / total_sks
