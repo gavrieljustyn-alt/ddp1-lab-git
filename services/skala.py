@@ -11,18 +11,21 @@ SKALA_UI = [
 ]
 
 def nilai_ke_huruf(nilai):
+    """Huruf mutu untuk nilai angka. ValueError jika nilai di bawah 0."""
     for batas, huruf, bobot in SKALA_UI:
         if nilai >= batas:
             return huruf
     raise ValueError("Nilai tidak valid")
 
 def huruf_ke_bobot(huruf_dicari):
+    """Bobot IPK (misalnya 3.7 untuk "A-"). ValueError jika huruf tidak dikenal."""
     for batas, huruf, bobot in SKALA_UI:
         if huruf_dicari == huruf:
             return bobot
     raise ValueError("Huruf tidak valid")
 
 def batas_bawah(huruf_dicari):
+    """Nilai angka minimal untuk mendapat huruf tertentu. ValueError jika huruf tidak dikenal."""
     for batas, huruf, bobot in SKALA_UI:
         if huruf_dicari == huruf:
             return batas
