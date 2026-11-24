@@ -1,4 +1,5 @@
 from models.matkul import MataKuliah, Komponen
+from services.skala import batas_bawah
 
 def total_bobot(matkul):
     total = 0
@@ -21,8 +22,22 @@ def hitung_nilai_akhir(matkul):
             raise ValueError("Masih ada komponen yang belum dinilai")
     return nilai_sementara(matkul)
 
-m = MataKuliah("DDP1", 4, [
-    Komponen("Tugas", 30, 80),
-    Komponen("UTS", 30, 70),
-    Komponen("UAS", 40),
-])
+def nilai_minimal(matkul, target_huruf):
+    target = batas_bawah(target_huruf)
+    selisih = target - nilai_sementara(matkul)
+    
+    if selisih <= 0:
+        return 0
+    
+    sisa_bobot = 0
+    for k in matkul.komponen:
+        if k.nilai == None:                     
+            sisa_bobot += k.bobot
+    
+    if sisa_bobot == 0:
+        return None
+    
+    dibutuhkan = selisih / (sisa_bobot / 100)
+    if dibutuhkan > 100:
+        return None
+    return dibutuhkan
