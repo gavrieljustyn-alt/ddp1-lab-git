@@ -49,6 +49,8 @@ def hitung_ipk(riwayat):
     total_poin = 0
     total_sks = 0
     for sks, huruf in riwayat:
+        if sks <= 0:
+            raise ValueError('SKS harus diatas 0!')
         total_poin += sks * huruf_ke_bobot(huruf)
         total_sks += sks
     return total_poin / total_sks
