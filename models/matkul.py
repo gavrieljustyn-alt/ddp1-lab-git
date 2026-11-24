@@ -2,6 +2,7 @@ from dataclasses import dataclass, field
 
 @dataclass
 class Komponen:
+    """Satu komponen penilaian. nilai=None berarti belum dinilai."""
     nama: str
     bobot: float
     nilai: float | None = None
@@ -14,6 +15,7 @@ class Komponen:
     
 @dataclass
 class MataKuliah:
+    """Satu mata kuliah beserta SKS dan daftar komponen penilaiannya."""
     nama: str
     sks: int
     komponen: list[Komponen] = field(default_factory=list)
