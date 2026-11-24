@@ -80,3 +80,7 @@ def test_hitung_ipk_kosong():
 def test_hitung_ipk_huruf_salah():
     with pytest.raises(ValueError):
         hitung_ipk([(3, "Z")])
+        
+def test_hitung_ipk_sks_nol():
+    with pytest.raises(ValueError):
+        hitung_ipk([(0, "A")])
