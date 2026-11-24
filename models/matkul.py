@@ -17,5 +17,3 @@ m = MataKuliah("DDP1", 4, [
     Komponen("UTS", 30, 70),
     Komponen("UAS", 40),
 ])
-print(m.nama, m.sks, len(m.komponen))
-print(m.komponen[2])
