@@ -6,14 +6,19 @@ class Komponen:
     bobot: float
     nilai: float | None = None
     
+    def __post_init__(self):
+        if not (0 < self.bobot <= 100):
+            raise ValueError("Bobot harus lebih dari 0 dan maksimal 100")
+        if self.nilai is not None and not (0 <= self.nilai <= 100):  
+            raise ValueError("Nilai harus 0 sampai 100")
+    
 @dataclass
 class MataKuliah:
     nama: str
     sks: int
     komponen: list[Komponen] = field(default_factory=list)
     
-m = MataKuliah("DDP1", 4, [
-    Komponen("Tugas", 30, 80),
-    Komponen("UTS", 30, 70),
-    Komponen("UAS", 40),
-])
+    def __post_init__(self):
+        if self.sks <= 0:
+            raise ValueError('SKS harus lebih dari 0!')
+    
